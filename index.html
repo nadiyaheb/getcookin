@@ -3,14 +3,18 @@
 <head>
 	<title>Get Cookin'</title>
 	<script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
+	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
 </head>
 <body>
 <h1>Get Cookin'</h1>
 
-<form>
+<form id="addToPantry" method="post">
 	<label>Enter Your Food Items:</label>
-	<input type="text" name="foodItems" />
+	<input type="text" name="foodItem" />
+	<input type="submit" value="Add to Pantry" />
 </form>
+
+<div id="pantryInventory"></div>
 	<script src="app.js"></script>
 </body>
 </html>
