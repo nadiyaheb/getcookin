@@ -7,14 +7,27 @@
 </head>
 <body>
 <h1>Get Cookin'</h1>
-
+  <script id="ingreList" type="text/x-handlebars-template">
+      <li>
+        <span>{{name}}</span>
+        <a href="#" class="delete-btn" data-id="{{key}}">Delete</a>
+      </li>
+    </script>
 <form id="addToPantry" method="post">
 	<label>Enter Your Food Items:</label>
 	<input type="text" name="foodItem" />
 	<input type="submit" value="Add to Pantry" />
 </form>
 
-<div id="pantryInventory"></div>
+<div id="pantryInventory">
+	  
+
+</div>
+<input type="button" value="Recipe" id="getRecipes" />
+<div id="suggestedRecipes"></div>
+<div id="mainRecipe"></div>
+	
 	<script src="app.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 </body>
 </html>
