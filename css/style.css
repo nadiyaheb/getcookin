@@ -1,0 +1,13 @@
+#suggestedRecipes li{
+	list-style-type: none;
+}
+
+.recipeItem{
+	text-align: center;
+}
+
+.recipeItem img{
+	width: 280px;
+	display:block;
+    margin:auto;
+}

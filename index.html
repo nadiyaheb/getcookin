@@ -4,29 +4,51 @@
 	<title>Get Cookin'</title>
 	<script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
 	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+<link href="css/normalize.css" rel="stylesheet">
+ 	<link href="css/style.css" rel="stylesheet">
+ <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
 <body>
-<h1>Get Cookin'</h1>
-  <script id="ingreList" type="text/x-handlebars-template">
+<div class="container">
+	<div class="row">
+		<h1>Get Cookin'</h1>
+	</div>
+	
+	<script id="ingreList" type="text/x-handlebars-template">
       <li>
         <span>{{name}}</span>
         <a href="#" class="delete-btn" data-id="{{key}}">Delete</a>
       </li>
     </script>
-<form id="addToPantry" method="post">
-	<label>Enter Your Food Items:</label>
-	<input type="text" name="foodItem" />
-	<input type="submit" value="Add to Pantry" />
-</form>
-
-<div id="pantryInventory">
-	  
-
-</div>
-<input type="button" value="Recipe" id="getRecipes" />
-<div id="suggestedRecipes"></div>
-<div id="mainRecipe"></div>
 	
+	<div class="row">
+		<div class="col-md-4">
+			<form id="addToPantry" method="post">
+				<label>Enter Your Food Items:</label>
+				<input type="text" name="foodItem" />
+				<input type="submit" value="Add to Pantry" />
+			</form>
+			<div id="pantryInventory"></div>
+
+			<input type="button" value="Recipe" id="getRecipes" />
+		</div>
+		<div class="col-md-8">
+			
+			<div id="mainRecipe"></div>
+			<div id="suggestedRecipes" class="row"></div>
+			<script id="recipeList" type="text/x-handlebars-template">
+			      <li class="col-md-6">
+			        <a class="recipeItem" href="#" id="{{id}}">
+			        <img class="img-circle" alt="{{recipeName}}" src="{{imgUrl}}"/>
+			        <p>{{recipeName}}</p>
+			        <p>{{totalCookTime}} Minutes</p>
+			        </a>
+			      </li>
+			    </script>
+
+		</div>
+    </div>
+</div>	
 	<script src="app.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 </body>

@@ -2,8 +2,11 @@ $(document).ready(function(){
 
 var fireb = new Firebase("https://getcookin.firebaseio.com");
 var ingredients =[];
+var recipeListArr = [];
 var ingredientListHtml = $('#ingreList').html();
 var compiledTemplateList = Handlebars.compile(ingredientListHtml);
+var suggestedRecipesHtml = $('#recipeList').html();
+var compiledRecipeTemplateList = Handlebars.compile(suggestedRecipesHtml);
 
 $("#addToPantry").submit(function(e){
 	e.preventDefault();
@@ -40,11 +43,6 @@ function getPantry(){
 		}
 			
 		
-		// $("#pantryInventory li span").each(
-		// 	function() { 
-		// 		ingredientsArray.push($(el).text())
-		// 	 }
-		// )
 	})
 }
 
@@ -60,7 +58,7 @@ $("#getRecipes").on("click", function(){
 	var yumKey = "4dce213045767f5ce8d95fd7bcf16500";
 	var foodQuery = "requirePictures=true";
 	var ingredientParam = "";
-
+	$("#suggestedRecipes").empty();
 	console.log(ingredients);
 
 	ingredients.forEach(function(ingredient){
@@ -73,29 +71,50 @@ $("#getRecipes").on("click", function(){
 
 	//foodQuery += ingredientParam;
 
-	var url = "http://api.yummly.com/v1/api/recipes?_app_id="+ yumID +"&_app_key="+ yumKey +"&" + ingredientParam + foodQuery;
+	var url = "http://api.yummly.com/v1/api/recipes?_app_id="+ yumID +"&_app_key="+ yumKey +"&" + ingredientParam + foodQuery + "&maxResult=10&start=10";
 	
 	$.ajax({
 		url: url,
 		method: "GET",
 		dataType: "jsonp",
 		success: function(response){
-			console.log(url);
+			//console.log(url);
 			console.log(response);
 			var matches = response.matches;
 			console.log(matches);
 			matches.forEach(function(foo){
 
-				var recipeName = foo.recipeName;
-				console.log(recipeName);
-				var imgUrl = foo.imageUrlsBySize[90];
-				console.log("img url", imgUrl);
+				//var recipeName = foo.recipeName;
+				//console.log(recipeName);
+				var orginalImgUrl = foo.imageUrlsBySize[90];
+				var imgUrl = orginalImgUrl.replace("=s90-c","=s480-c-e365");
+				//console.log("img url", imgUrl);
 				var imgEl = $('<img src="' + imgUrl + '"/>');
-				console.log(imgEl);
-				var recipeListItem = $('<a class="recipe" href="#" id='+ foo.id +'><p>' + recipeName + "</p></a>").append(imgEl);
-				$('#suggestedRecipes').append(recipeListItem);
+				//console.log(imgEl);
+				var totalCookTime = (foo.totalTimeInSeconds/60);
+				//var recipeListItem = $('<a class="recipe" href="#" id='+ foo.id +'><p>' + recipeName + "</p></a>").append(imgEl);
+
+				recipeListArr.push({
+					recipeName: foo.recipeName,
+					imgUrl: imgUrl,
+					id: foo.id,
+					totalCookTime: totalCookTime
+
+				});
+
+				var compliedRecipeHtml = compiledRecipeTemplateList({
+					recipeName: foo.recipeName,
+					imgUrl: imgUrl,
+					id: foo.id,
+					totalCookTime: totalCookTime
+
+				})
+				
+				//$('#suggestedRecipes').append(recipeListItem);
+				$("#suggestedRecipes").append(compliedRecipeHtml);
 			})
-			
+			//$("#pantryInventory").append(compliedRecipeHtml);
+			//console.log("recipeListArr", recipeListArr);
 		}
 	})
 })
@@ -103,6 +122,7 @@ $("#getRecipes").on("click", function(){
 $("#suggestedRecipes").on("click", ".recipe", function(e){
 
 	e.preventDefault();
+
 	var yumID = "85a16a2a";
 	var yumKey = "4dce213045767f5ce8d95fd7bcf16500";
 	var recipeQuery = $(this).attr("id");
@@ -125,8 +145,8 @@ $("#suggestedRecipes").on("click", ".recipe", function(e){
 			
 			mainRecipeEl.appendTo("#mainRecipe");
 
-			console.log(img[0].hostedLargeUrl);
-			console.log(attribution.url);
+			//console.log(img[0].hostedLargeUrl);
+			//console.log(attribution.url);
 
 		}
 	})
