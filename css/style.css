@@ -1,13 +1,82 @@
-#suggestedRecipes li{
-	list-style-type: none;
+h1 {
+	font-family: 'Lobster Two', cursive;
+
+}
+h2, h3, p, li{
+	font-family: 'Raleway', 'Helvetica', sans-serif;
+	font-weight: 500;
 }
 
+#pantryList li, #suggestedRecipes li{
+	list-style: none;
+}
+
+#pantryList{
+	margin: 10px 0 15px 0;
+}
+
+#pantryList span{
+	font-size: 1.2em;
+}
+
+#pantryList li{
+	background-color:#F9F9F9; 
+	margin-bottom: 3px;
+	padding-left: 5px;
+}
+#selectedRecipe{
+	background-color:#F9F9F9;
+	margin-bottom: 20px; 
+}
+
+
+
+#suggestedRecipes li{
+	border: 1px solid #ffc126;
+	height: 300px;
+	
+}
+
+#suggestedRecipes li a{
+	text-decoration: none;
+	
+}
+
+.recipeItem p{
+	font-size: 1.2em;
+	line-height: 1em;
+	color: #333;
+
+}
 .recipeItem{
 	text-align: center;
+	height: 350px;
+	
 }
 
 .recipeItem img{
-	width: 280px;
+	width: 200px;
 	display:block;
-    margin:auto;
+    margin:10px auto;
+}
+
+#recipeDescript{
+	padding-left: 30px;
+}
+
+#recipeDescript span{
+	font-size: 2.5em;
+}
+
+#recipeDescript h2{
+	margin-bottom: 25px;
+}
+#recipeDescript p{
+	line-height: 1.7em;
+}
+#recipeDescript .btn{
+margin-top: 25px; 
+}
+#mainRecipe li{
+	list-style: circle;
 }
